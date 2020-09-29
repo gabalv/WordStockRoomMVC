@@ -32,6 +32,11 @@ namespace WordStockRoom.Data
             return new ApplicationDbContext();
         }
 
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Word> Words { get; set; }
+        public DbSet<Sentence> Sentences { get; set; }
+        public DbSet<Video> Videos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
