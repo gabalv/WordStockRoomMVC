@@ -16,6 +16,9 @@ namespace WordStockRoom.Data
         public int WordId { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public string WordName { get; set; }
 
         [Required]

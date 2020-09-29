@@ -14,6 +14,9 @@ namespace WordStockRoom.Data
         public int VideoId { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public string URL { get; set; }
 
 
