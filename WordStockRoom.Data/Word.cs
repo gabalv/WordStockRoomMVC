@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace WordStockRoom.Data
 {
-    public enum PartOfSpeech { undefined, noun, pronoun, verb, adjective, adverb, preposition, conjunction, interjection, postposition, determiner }
+    public enum PartOfSpeech { undefined, noun, pronoun, verb, adjective, adverb, preposition, postposition, conjunction, interjection, determiner }
+
+    public struct ConvertEnum
+    {
+        public int Value { get; set; }
+        public string Text { get; set; }
+    }
 
     public class Word
     {

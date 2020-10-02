@@ -54,10 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LanguageCreate.cs" />
-    <Compile Include="LanguageEdit.cs" />
-    <Compile Include="LanguageListItem.cs" />
+    <Compile Include="Language\LanguageCreate.cs" />
+    <Compile Include="Language\LanguageEdit.cs" />
+    <Compile Include="Language\LanguageListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Word\WordCreate.cs" />
+    <Compile Include="Word\WordDetail.cs" />
+    <Compile Include="Word\WordEdit.cs" />
+    <Compile Include="Word\WordListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -14,6 +14,7 @@ namespace WordStockRoom.Models
         [Display(Name="Language Family")]
         public string LanguageFamily { get; set; }
 
+        [Display(Name="Word Count")]
         public int WordCount { get; set; }
     }
 }
