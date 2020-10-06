@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WordStockRoom.Data;
 using WordStockRoom.Models;
 using WordStockRoom.Services;
 
@@ -27,10 +28,27 @@ namespace WordStockRoom.WebMVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
+            var partsOfSpeech = new List<ConvertEnum>();
+            foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
+            {
+                partsOfSpeech.Add(new ConvertEnum
+                {
+                    Value = (int)part,
+                    Text = part.ToString()
+                });
+            }
+            ViewBag.PartOfSpeechEnum = partsOfSpeech;
+
+            LanguageService langService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
+            var fromDatabaseEF = new SelectList(langService.GetLanguages().ToList(), "LanguageId", "Name");
+            ViewData["Languages"] = fromDatabaseEF;
+
             return View();
         }
 
         // POST: Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(WordCreate model)
         {
             if (!ModelState.IsValid) return View(model);

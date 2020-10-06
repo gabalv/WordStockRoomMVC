@@ -9,6 +9,7 @@ namespace WordStockRoom.Models
 {
     public class LanguageListItem
     {
+        public int LanguageId { get; set; }
         public string Name { get; set; }
 
         [Display(Name="Language Family")]

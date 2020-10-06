@@ -44,6 +44,7 @@ namespace WordStockRoom.Services
                     e =>
                     new LanguageListItem
                     {
+                        LanguageId = e.LanguageId,
                         Name = e.Name,
                         LanguageFamily = e.LanguageFamily,
                         WordCount = e.Words.Count

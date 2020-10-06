@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PartOfSpeech, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PartOfSpeech, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Part Of Speech", new SelectList(ViewBag.PartOfSpeechEnum, "Value", "Text"))
                 @Html.ValidationMessageFor(model => model.PartOfSpeech, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Languages", (IEnumerable<SelectListItem>)ViewData["Languages"])
                 @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
             </div>
         </div>
