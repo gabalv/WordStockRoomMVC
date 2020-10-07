@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WordStockRoom.Data;
@@ -18,10 +19,14 @@ namespace WordStockRoom.WebMVC.Controllers
         }
 
         // GET: Word
-        public ActionResult Index()
+        [Route("Word/{id}")]
+        public ActionResult Index(int? id)
         {
+            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var service = CreateWordService();
-            var model = service.GetWords();
+            var model = service.GetWordsByLanguage((int)id);
+            if (model is null) return HttpNotFound();
             return View(model);
         }
 
@@ -54,7 +59,6 @@ namespace WordStockRoom.WebMVC.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var service = CreateWordService();
-
             if (service.AddWord(model))
             {
                 TempData["SaveResult"] = "Word added successfully.";
@@ -62,6 +66,15 @@ namespace WordStockRoom.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Word was not added.");
+            return View(model);
+        }
+
+        // GET: Details
+        public ActionResult Details(int id)
+        {
+            var service = CreateWordService();
+            var model = service.GetWordById(id);
+
             return View(model);
         }
     }

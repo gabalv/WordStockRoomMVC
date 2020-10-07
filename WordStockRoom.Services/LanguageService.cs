@@ -59,7 +59,9 @@ namespace WordStockRoom.Services
             var entity =
                 _context
                 .Languages
-                .Single(e => e.LanguageId == id && e.UserId == _userId);
+                .SingleOrDefault(e => e.LanguageId == id && e.UserId == _userId);
+
+            if (entity is null) return null;
 
             return new LanguageListItem
             {

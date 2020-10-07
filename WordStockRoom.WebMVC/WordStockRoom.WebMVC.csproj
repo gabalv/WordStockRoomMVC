@@ -242,6 +242,7 @@
     <Content Include="Views\Language\Delete.cshtml" />
     <Content Include="Views\Word\Index.cshtml" />
     <Content Include="Views\Word\Create.cshtml" />
+    <Content Include="Views\Word\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

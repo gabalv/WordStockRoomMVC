@@ -35,16 +35,16 @@ namespace WordStockRoom.Services
         }
 
         // Get all
-        public IEnumerable<WordListItem> GetWords()
+        public IEnumerable<WordListItem> GetWordsByLanguage(int id)
         {
             var query =
                 _context
                 .Words
-                .Where(e => e.UserId == _userId)
+                .Where(e => e.UserId == _userId && e.LanguageId == id)
                 .Select(e => new WordListItem
                 {
                     WordName = e.WordName,
-                    Language = Convert.ToString(e.Language),
+                    Language = e.Language.Name,
                     Translation = e.Translation
                 });
 
@@ -154,6 +154,12 @@ namespace WordStockRoom.Services
             }
 
             return result;
+        }
+
+        // helper
+        public string ConvertFromEnumToString(PartOfSpeech input)
+        {
+            return Convert.ToString(input);
         }
     }
 }

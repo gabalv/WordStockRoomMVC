@@ -10,6 +10,7 @@ using WordStockRoom.Services;
 
 namespace WordStockRoom.WebMVC.Controllers
 {
+    [Authorize]
     public class LanguageController : Controller
     {
         private LanguageService CreateLanguageService()
@@ -22,6 +23,7 @@ namespace WordStockRoom.WebMVC.Controllers
         {
             var service = CreateLanguageService();
             var model = service.GetLanguages();
+
             return View(model);
         }
 
@@ -39,7 +41,6 @@ namespace WordStockRoom.WebMVC.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var service = CreateLanguageService();
-
             if (service.AddLanguage(model))
             {
                 TempData["SaveResult"] = "Language added successfully.";
@@ -51,17 +52,22 @@ namespace WordStockRoom.WebMVC.Controllers
         }
 
         // GET: Edit
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var service = CreateLanguageService();
-            var language = service.GetLanguageById(id);
+            var language = service.GetLanguageById((int)id);
+            if (language is null) return HttpNotFound();
+
             var model =
                 new LanguageEdit
                 {
-                    LanguageId = id,
+                    LanguageId = (int)id,
                     Name = language.Name,
                     LanguageFamily = language.LanguageFamily
                 };
+
             return View(model);
         }
 
@@ -79,7 +85,6 @@ namespace WordStockRoom.WebMVC.Controllers
             }
 
             var service = CreateLanguageService();
-
             if (service.UpdateLanguage(model))
             {
                 TempData["SaveResult"] = "Language was updated.";
@@ -87,14 +92,17 @@ namespace WordStockRoom.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Language was not updated.");
-            return View();
+            return View(model);
         }
 
         [ActionName("Delete")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var service = CreateLanguageService();
-            var model = service.GetLanguageById(id);
+            var model = service.GetLanguageById((int)id);
+            if (model is null) return HttpNotFound();
 
             return View(model);
         }
@@ -105,11 +113,13 @@ namespace WordStockRoom.WebMVC.Controllers
         public ActionResult DeleteLanguage(int id)
         {
             var service = CreateLanguageService();
+            if (service.DeleteLanguage(id))
+            {
+                TempData["SaveResult"] = "Language was deleted.";
+                return RedirectToAction("Index");
+            }
 
-            service.DeleteLanguage(id);
-
-            TempData["SaveResult"] = "Language was deleted.";
-
+            ModelState.AddModelError("", "Language was not deleted.");
             return RedirectToAction("Index");
         }
     }
