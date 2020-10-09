@@ -14,16 +14,16 @@ namespace WordStockRoom.WebMVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Word",
+                url: "Word/{languageId}/{action}/{id}",
+                defaults: new { controller = "Word", action = "Index", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "Word",
-                url: "Word/{id}/{action}",
-                defaults: new { controller = "Word", action = "Index" }
-                );
         }
     }
 }

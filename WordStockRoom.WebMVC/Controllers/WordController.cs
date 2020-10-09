@@ -19,19 +19,20 @@ namespace WordStockRoom.WebMVC.Controllers
         }
 
         // GET: Word
-        [Route("Word/{id}")]
-        public ActionResult Index(int? id)
+        //[Route("Word/{id}")]
+        public ActionResult Index(int? languageId)
         {
-            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var service = CreateWordService();
-            var model = service.GetWordsByLanguage((int)id);
+            var model = service.GetWordsByLanguage((int)languageId);
             if (model is null) return HttpNotFound();
+
             return View(model);
         }
 
         // GET: Create
-        public ActionResult Create()
+        public ActionResult Create(int languageId)
         {
             var partsOfSpeech = new List<ConvertEnum>();
             foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
@@ -45,8 +46,7 @@ namespace WordStockRoom.WebMVC.Controllers
             ViewBag.PartOfSpeechEnum = partsOfSpeech;
 
             LanguageService langService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
-            var fromDatabaseEF = new SelectList(langService.GetLanguages().ToList(), "LanguageId", "Name");
-            ViewData["Languages"] = fromDatabaseEF;
+            ViewData["LanguageName"] = langService.GetLanguageById(languageId).Name;
 
             return View();
         }
@@ -76,6 +76,93 @@ namespace WordStockRoom.WebMVC.Controllers
             var model = service.GetWordById(id);
 
             return View(model);
+        }
+
+        // GET: Edit
+        public ActionResult Edit(int? id)
+        {
+            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var service = CreateWordService();
+            var word = service.GetWordById((int)id);
+            if (word is null) return HttpNotFound();
+
+            var model =
+                new WordEdit
+                {
+                    WordId = (int)id,
+                    WordName = word.WordName,
+                    Translation = word.Translation,
+                    PartOfSpeech = word.PartOfSpeech,
+                    Language = word.Language
+                };
+
+            var partsOfSpeech = new List<ConvertEnum>();
+            foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
+            {
+                partsOfSpeech.Add(new ConvertEnum
+                {
+                    Value = (int)part,
+                    Text = part.ToString()
+                });
+            }
+            ViewBag.PartOfSpeechEnum = partsOfSpeech;
+
+            return View(model);
+        }
+
+        // POST: Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, WordEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.WordId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateWordService();
+            if (service.UpdateWord(model))
+            {
+                TempData["SaveResult"] = "Word was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Word was not updated.");
+            return View(model);
+        }
+
+        // GET: Delete
+        [ActionName("Delete")]
+        public ActionResult Delete(int? id)
+        {
+            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var service = CreateWordService();
+            var model = service.GetWordById((int)id);
+            if (model is null) return HttpNotFound();
+
+            return View(model);
+        }
+
+        // POST: Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var service = CreateWordService();
+            if (service.DeleteWord(id))
+            {
+                TempData["SaveResult"] = "Word was deleted.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Word was not deleted.");
+            return RedirectToAction("Index");
         }
     }
 }
