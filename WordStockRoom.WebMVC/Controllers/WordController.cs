@@ -32,8 +32,10 @@ namespace WordStockRoom.WebMVC.Controllers
         }
 
         // GET: Create
-        public ActionResult Create(int languageId)
+        public ActionResult Create(int? languageId)
         {
+            if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var partsOfSpeech = new List<ConvertEnum>();
             foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
             {
@@ -46,7 +48,7 @@ namespace WordStockRoom.WebMVC.Controllers
             ViewBag.PartOfSpeechEnum = partsOfSpeech;
 
             LanguageService langService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
-            ViewData["LanguageName"] = langService.GetLanguageById(languageId).Name;
+            ViewData["LanguageName"] = langService.GetLanguageById((int)languageId).Name;
 
             return View();
         }
