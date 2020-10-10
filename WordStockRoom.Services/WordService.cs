@@ -12,10 +12,12 @@ namespace WordStockRoom.Services
     {
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly int _languageId;
 
-        public WordService(Guid userId)
+        public WordService(Guid userId, int languageId)
         {
             _userId = userId;
+            _languageId = languageId;
         }
 
         // Create
@@ -26,8 +28,8 @@ namespace WordStockRoom.Services
                 UserId = _userId,
                 WordName = model.WordName,
                 Translation = model.Translation,
-                PartOfSpeech = ConvertFromStringToEnum(model.PartOfSpeech),
-                Language = _context.Languages.Single(e => e.UserId == _userId && e.Name == model.Language)
+                PartOfSpeech = model.PartOfSpeech,
+                LanguageId = _languageId
             };
 
             _context.Words.Add(entity);
@@ -43,7 +45,9 @@ namespace WordStockRoom.Services
                 .Where(e => e.UserId == _userId && e.LanguageId == id)
                 .Select(e => new WordListItem
                 {
+                    WordId = e.WordId,
                     WordName = e.WordName,
+                    LanguageId = e.LanguageId,
                     Language = e.Language.Name,
                     Translation = e.Translation
                 });
@@ -61,10 +65,11 @@ namespace WordStockRoom.Services
 
             return new WordDetail
             {
+                WordId = entity.WordId,
                 WordName = entity.WordName,
                 Language = entity.Language.Name,
                 Translation = entity.Translation,
-                PartOfSpeech = Convert.ToString(entity.PartOfSpeech),
+                PartOfSpeech = entity.PartOfSpeech,
                 Sentences = ConvertFromSentencesToStrings(entity.Sentences),
                 Videos = ConvertFromVideosToDictionary(entity.Videos)
             };
@@ -80,8 +85,7 @@ namespace WordStockRoom.Services
 
             entity.WordName = model.WordName;
             entity.Translation = model.Translation;
-            entity.PartOfSpeech = ConvertFromStringToEnum(model.PartOfSpeech);
-            entity.Language = _context.Languages.Single(e => e.UserId == _userId && e.Name == model.Language);
+            entity.PartOfSpeech = model.PartOfSpeech;
 
             return _context.SaveChanges() == 1;
         }
@@ -99,36 +103,6 @@ namespace WordStockRoom.Services
             return _context.SaveChanges() == 1;
         }
 
-
-        // helper
-        public PartOfSpeech ConvertFromStringToEnum(string input)
-        {
-            switch(input)
-            {
-                case "noun":
-                    return PartOfSpeech.noun;
-                case "pronoun":
-                    return PartOfSpeech.pronoun;
-                case "verb":
-                    return PartOfSpeech.verb;
-                case "adjective":
-                    return PartOfSpeech.adjective;
-                case "adverb":
-                    return PartOfSpeech.adverb;
-                case "preposition":
-                    return PartOfSpeech.preposition;
-                case "postposition":
-                    return PartOfSpeech.postposition;
-                case "conjunction":
-                    return PartOfSpeech.conjunction;
-                case "interjection":
-                    return PartOfSpeech.interjection;
-                case "determiner":
-                    return PartOfSpeech.determiner;
-                default:
-                    return PartOfSpeech.undefined;
-            }
-        }
 
         // helper
         public List<string> ConvertFromSentencesToStrings(ICollection<Sentence> sentences)
@@ -154,12 +128,6 @@ namespace WordStockRoom.Services
             }
 
             return result;
-        }
-
-        // helper
-        public string ConvertFromEnumToString(PartOfSpeech input)
-        {
-            return Convert.ToString(input);
         }
     }
 }

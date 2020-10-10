@@ -10,12 +10,6 @@ namespace WordStockRoom.Data
 {
     public enum PartOfSpeech { undefined, noun, pronoun, verb, adjective, adverb, preposition, postposition, conjunction, interjection, determiner }
 
-    public struct ConvertEnum
-    {
-        public int Value { get; set; }
-        public string Text { get; set; }
-    }
-
     public class Word
     {
         [Key]
@@ -37,10 +31,9 @@ namespace WordStockRoom.Data
 
         public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
 
-
+        [Required]
         [ForeignKey(nameof(Language))]
         public int LanguageId { get; set; }
-        [Required]
         public virtual Language Language { get; set; }
     }
 }

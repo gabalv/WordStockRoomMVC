@@ -13,9 +13,9 @@ namespace WordStockRoom.WebMVC.Controllers
 {
     public class WordController : Controller
     {
-        private WordService CreateWordService()
+        private WordService CreateWordService(int languageId)
         {
-            return new WordService(Guid.Parse(User.Identity.GetUserId()));
+            return new WordService(Guid.Parse(User.Identity.GetUserId()), languageId);
         }
 
         // GET: Word
@@ -24,7 +24,7 @@ namespace WordStockRoom.WebMVC.Controllers
         {
             if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var service = CreateWordService();
+            var service = CreateWordService((int)languageId);
             var model = service.GetWordsByLanguage((int)languageId);
             if (model is null) return HttpNotFound();
 
@@ -36,31 +36,17 @@ namespace WordStockRoom.WebMVC.Controllers
         {
             if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var partsOfSpeech = new List<ConvertEnum>();
-            foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
-            {
-                partsOfSpeech.Add(new ConvertEnum
-                {
-                    Value = (int)part,
-                    Text = part.ToString()
-                });
-            }
-            ViewBag.PartOfSpeechEnum = partsOfSpeech;
-
-            LanguageService langService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
-            ViewData["LanguageName"] = langService.GetLanguageById((int)languageId).Name;
-
             return View();
         }
 
         // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(WordCreate model)
+        public ActionResult Create(int languageId, WordCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateWordService();
+            var service = CreateWordService(languageId);
             if (service.AddWord(model))
             {
                 TempData["SaveResult"] = "Word added successfully.";
@@ -72,20 +58,22 @@ namespace WordStockRoom.WebMVC.Controllers
         }
 
         // GET: Details
-        public ActionResult Details(int id)
+        public ActionResult Details(int? languageId, int? id)
         {
-            var service = CreateWordService();
-            var model = service.GetWordById(id);
+            if (languageId is null || id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var service = CreateWordService((int)languageId);
+            var model = service.GetWordById((int)id);
 
             return View(model);
         }
 
         // GET: Edit
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? languageId, int? id)
         {
-            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (languageId is null || id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var service = CreateWordService();
+            var service = CreateWordService((int)languageId);
             var word = service.GetWordById((int)id);
             if (word is null) return HttpNotFound();
 
@@ -95,20 +83,8 @@ namespace WordStockRoom.WebMVC.Controllers
                     WordId = (int)id,
                     WordName = word.WordName,
                     Translation = word.Translation,
-                    PartOfSpeech = word.PartOfSpeech,
-                    Language = word.Language
+                    PartOfSpeech = word.PartOfSpeech
                 };
-
-            var partsOfSpeech = new List<ConvertEnum>();
-            foreach (PartOfSpeech part in Enum.GetValues(typeof(PartOfSpeech)))
-            {
-                partsOfSpeech.Add(new ConvertEnum
-                {
-                    Value = (int)part,
-                    Text = part.ToString()
-                });
-            }
-            ViewBag.PartOfSpeechEnum = partsOfSpeech;
 
             return View(model);
         }
@@ -116,7 +92,7 @@ namespace WordStockRoom.WebMVC.Controllers
         // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, WordEdit model)
+        public ActionResult Edit(int languageId, int id, WordEdit model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -126,7 +102,7 @@ namespace WordStockRoom.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateWordService();
+            var service = CreateWordService(languageId);
             if (service.UpdateWord(model))
             {
                 TempData["SaveResult"] = "Word was updated.";
@@ -139,11 +115,11 @@ namespace WordStockRoom.WebMVC.Controllers
 
         // GET: Delete
         [ActionName("Delete")]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? languageId, int? id)
         {
-            if (id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (languageId is null || id is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var service = CreateWordService();
+            var service = CreateWordService((int)languageId);
             var model = service.GetWordById((int)id);
             if (model is null) return HttpNotFound();
 
@@ -154,9 +130,9 @@ namespace WordStockRoom.WebMVC.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int languageId, int id)
         {
-            var service = CreateWordService();
+            var service = CreateWordService(languageId);
             if (service.DeleteWord(id))
             {
                 TempData["SaveResult"] = "Word was deleted.";

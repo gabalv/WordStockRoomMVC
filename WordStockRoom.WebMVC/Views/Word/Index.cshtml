@@ -39,6 +39,7 @@
                 @Html.DisplayFor(modelItem => item.Translation)
             </td>
             <td>
+                @Html.ActionLink("Details", "Details", new { id=item.WordId })
             </td>
         </tr>
     }

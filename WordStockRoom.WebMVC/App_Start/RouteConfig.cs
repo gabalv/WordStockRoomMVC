@@ -20,6 +20,12 @@ namespace WordStockRoom.WebMVC
                 );
 
             routes.MapRoute(
+                name: "Sentence",
+                url: "Sentence/{languageId}/{wordId}/{action}/{id}",
+                defaults: new { controller = "Sentence", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

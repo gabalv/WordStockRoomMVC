@@ -12,12 +12,12 @@ namespace WordStockRoom.Services
     {
         private readonly Guid _userId;
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
-        private readonly Word _word;
+        private readonly int _wordId;
 
         public SentenceService(Guid userId, int wordId)
         {
             _userId = userId;
-            _word = _context.Words.Find(wordId);
+            _wordId = wordId;
         }
 
 
@@ -29,7 +29,7 @@ namespace WordStockRoom.Services
                 UserId = _userId,
                 SentenceContent = model.SentenceContent,
                 SentenceTranslation = model.SentenceTranslation,
-                Word = _word
+                WordId = _wordId
             };
 
             _context.Sentences.Add(entity);
@@ -42,9 +42,10 @@ namespace WordStockRoom.Services
             var query =
                 _context
                 .Sentences
-                .Where(e => e.UserId == _userId && e.WordId == _word.WordId)
+                .Where(e => e.UserId == _userId && e.WordId == _wordId)
                 .Select(e => new SentenceListItem
                 {
+                    SentenceId = e.SentenceId,
                     SentenceContent = e.SentenceContent,
                     SentenceTranslation = e.SentenceTranslation
                 });
@@ -62,6 +63,7 @@ namespace WordStockRoom.Services
 
             return new SentenceListItem
             {
+                SentenceId = id,
                 SentenceContent = entity.SentenceContent,
                 SentenceTranslation = entity.SentenceTranslation
             };

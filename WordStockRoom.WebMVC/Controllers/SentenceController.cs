@@ -36,13 +36,14 @@ namespace WordStockRoom.WebMVC.Controllers
         {
             if (wordId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+            ViewData["WordId"] = (int)wordId;
             return View();
         }
 
         // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int wordId, SentenceCreate model)
+        public ActionResult Create(int languageId, int wordId, SentenceCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -50,7 +51,7 @@ namespace WordStockRoom.WebMVC.Controllers
             if (service.AddSentence(model))
             {
                 TempData["SaveResult"] = "Sentence added successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Word", new { languageId, id=wordId });
             }
 
             ModelState.AddModelError("", "Sentence was not added.");

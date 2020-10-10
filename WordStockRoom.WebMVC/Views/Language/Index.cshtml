@@ -39,7 +39,8 @@
                 @Html.DisplayFor(modelItem => item.LanguageFamily)
             </td>
             <td>
-                
+                @Html.ActionLink("Edit", "Edit", new { id=item.LanguageId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.LanguageId })
             </td>
         </tr>
     }

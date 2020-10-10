@@ -10,6 +10,9 @@ namespace WordStockRoom.Models
     public class SentenceListItem
     {
         [Required]
+        public int SentenceId { get; set; }
+
+        [Required]
         public string SentenceContent { get; set; }
 
         [Required]

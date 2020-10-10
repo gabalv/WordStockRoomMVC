@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using WordStockRoom.Data;
 
 namespace WordStockRoom.Models
 {
@@ -19,9 +20,6 @@ namespace WordStockRoom.Models
 
         [Required]
         [Display(Name = "Part of Speech")]
-        public string PartOfSpeech { get; set; }
-
-        [Required]
-        public string Language { get; set; }
+        public PartOfSpeech PartOfSpeech { get; set; }
     }
 }

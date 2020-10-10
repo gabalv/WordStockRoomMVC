@@ -42,9 +42,21 @@
             @Html.DisplayFor(model => model.PartOfSpeech)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Sentences)
+        </dt>
+
+        @foreach (var item in Model.Sentences)
+        {
+            <dd>
+                @item 
+            </dd>
+        }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Add Sentence", "Create", "Sentence", new { Model.WordId }, null) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.WordId }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.WordId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

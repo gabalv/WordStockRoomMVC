@@ -22,10 +22,9 @@ namespace WordStockRoom.Data
         [Required]
         public string URL { get; set; }
 
-
+        [Required]
         [ForeignKey(nameof(Word))]
         public int WordId { get; set; }
-        [Required]
         public virtual Word Word { get; set; }
     }
 }

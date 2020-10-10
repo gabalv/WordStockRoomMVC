@@ -246,10 +246,12 @@
     <Content Include="Views\Word\Details.cshtml" />
     <Content Include="Views\Word\Edit.cshtml" />
     <Content Include="Views\Word\Delete.cshtml" />
+    <Content Include="Views\Sentence\Create.cshtml" />
+    <Content Include="Views\Sentence\Edit.cshtml" />
+    <Content Include="Views\Sentence\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Sentence\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
