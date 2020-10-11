@@ -70,7 +70,7 @@ namespace WordStockRoom.Services
                 Language = entity.Language.Name,
                 Translation = entity.Translation,
                 PartOfSpeech = entity.PartOfSpeech,
-                Sentences = ConvertFromSentencesToStrings(entity.Sentences),
+                Sentences = ConvertFromSentencesToDictionary(entity.Sentences),
                 Videos = ConvertFromVideosToDictionary(entity.Videos)
             };
         }
@@ -105,13 +105,13 @@ namespace WordStockRoom.Services
 
 
         // helper
-        public List<string> ConvertFromSentencesToStrings(ICollection<Sentence> sentences)
+        public Dictionary<int, string> ConvertFromSentencesToDictionary(ICollection<Sentence> sentences)
         {
-            List<string> result = new List<string>();
+            Dictionary<int, string> result = new Dictionary<int, string>();
 
             foreach (Sentence item in sentences)
             {
-                result.Add(item.SentenceContent);
+                result.Add(item.SentenceId, item.SentenceContent);
             }
 
             return result;

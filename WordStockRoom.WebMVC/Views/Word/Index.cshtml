@@ -33,13 +33,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.WordName)
+                @Html.ActionLink(item.WordName, "Details", new { id=item.WordId })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Translation)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id=item.WordId })
+                
             </td>
         </tr>
     }

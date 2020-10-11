@@ -65,6 +65,14 @@ namespace WordStockRoom.WebMVC.Controllers
             var service = CreateWordService((int)languageId);
             var model = service.GetWordById((int)id);
 
+            var sentenceService = new SentenceService(Guid.Parse(User.Identity.GetUserId()), (int)id);
+            List<SentenceListItem> sentences = new List<SentenceListItem>();
+            foreach (var item in model.Sentences)
+            {
+                sentences.Add(sentenceService.GetSentenceById(item.Key));
+            }
+            ViewBag.Sentences = sentences;
+
             return View(model);
         }
 

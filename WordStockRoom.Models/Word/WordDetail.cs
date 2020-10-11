@@ -14,7 +14,7 @@ namespace WordStockRoom.Models
         public string Language { get; set; }
         public string Translation { get; set; }
         public PartOfSpeech PartOfSpeech { get; set; }
-        public List<string> Sentences { get; set; }
+        public Dictionary<int, string> Sentences { get; set; }
         public Dictionary<int, string> Videos { get; set; }
     }
 }

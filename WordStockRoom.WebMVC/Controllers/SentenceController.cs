@@ -75,13 +75,14 @@ namespace WordStockRoom.WebMVC.Controllers
                     SentenceTranslation = sentence.SentenceTranslation
                 };
 
-            return View();
+            ViewData["WordId"] = (int)wordId;
+            return View(model);
         }
 
         // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int wordId, int id, SentenceEdit model)
+        public ActionResult Edit(int languageId, int wordId, int id, SentenceEdit model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -95,7 +96,7 @@ namespace WordStockRoom.WebMVC.Controllers
             if (service.UpdateSentence(model))
             {
                 TempData["SaveResult"] = "Sentence was successfully updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Word", new { languageId, id = wordId });
             }
 
             ModelState.AddModelError("", "Sentence was not updated.");
@@ -112,6 +113,7 @@ namespace WordStockRoom.WebMVC.Controllers
             var model = service.GetSentenceById((int)id);
             if (model is null) return HttpNotFound();
 
+            ViewData["WordId"] = (int)wordId;
             return View(model);
         }
 
@@ -119,17 +121,17 @@ namespace WordStockRoom.WebMVC.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int wordId, int id)
+        public ActionResult Delete(int languageId, int wordId, int id)
         {
             var service = CreateSentenceService(wordId);
             if (service.DeleteSentence(id))
             {
                 TempData["SaveResult"] = "Sentence was successfully deleted.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Word", new { languageId, id = wordId });
             }
 
             ModelState.AddModelError("", "Sentence was not deleted.");
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Word", new { languageId, id = wordId });
         }
     }
 }

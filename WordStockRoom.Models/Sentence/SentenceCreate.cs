@@ -10,9 +10,11 @@ namespace WordStockRoom.Models
     public class SentenceCreate
     {
         [Required]
+        [Display(Name = "Sentence")]
         public string SentenceContent { get; set; }
 
         [Required]
+        [Display(Name = "Translation")]
         public string SentenceTranslation { get; set; }
     }
 }

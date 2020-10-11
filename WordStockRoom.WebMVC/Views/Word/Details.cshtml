@@ -5,7 +5,15 @@
 }
 
 <h2>Details</h2>
-
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
 <div>
     <h4>WordDetail</h4>
     <hr />
@@ -46,17 +54,26 @@
             @Html.DisplayNameFor(model => model.Sentences)
         </dt>
 
-        @foreach (var item in Model.Sentences)
+        @foreach (var item in ViewBag.Sentences)
         {
             <dd>
-                @item 
+                @item.SentenceContent
+            </dd>
+
+            <dd>
+                @item.SentenceTranslation
+            </dd>
+
+            <dd>
+                @Html.ActionLink("Edit", "Edit", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null) |
+                @Html.ActionLink("Delete", "Delete", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null)
             </dd>
         }
     </dl>
 </div>
 <p>
     @Html.ActionLink("Add Sentence", "Create", "Sentence", new { Model.WordId }, null) |
-    @Html.ActionLink("Edit", "Edit", new { id=Model.WordId }) |
-    @Html.ActionLink("Delete", "Delete", new { id=Model.WordId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WordId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.WordId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
