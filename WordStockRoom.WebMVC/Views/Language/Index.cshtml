@@ -4,44 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<body style="background-color: #424242; color: #ABABAB;">
+    <h1>Your Languages</h1>
 
-<p>
-    @Html.ActionLink("Add Language", "Create")
-</p>
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LanguageFamily)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Add Language", "Create")
+    </p>
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Name, "Index", "Word", new { item.LanguageId }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LanguageFamily)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.LanguageId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.LanguageId })
-            </td>
-        </tr>
+        <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+            <h2>@Html.ActionLink(item.Name, "Index", "Word", new { item.LanguageId }, null)</h2>
+            <h4>@Html.DisplayFor(modelItem => item.LanguageFamily)</h4>
+            <span class="col-md-6">@Html.ActionLink("Edit", "Edit", new { id = item.LanguageId })</span>
+            <span class="col-md-6">@Html.ActionLink("Delete", "Delete", new { id = item.LanguageId })</span>
+        </div>
     }
-</table>
+</body>

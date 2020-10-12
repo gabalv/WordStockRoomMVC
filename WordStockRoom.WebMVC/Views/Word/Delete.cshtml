@@ -4,54 +4,54 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<body style="background-color: #424242; color: #ABABAB;">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        @Html.HiddenFor(model => model.WordId)
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.WordName)
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>WordDetail</h4>
-    <hr />
-    @Html.HiddenFor(model => model.WordId)
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.WordName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.WordName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WordName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Language)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Language)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Translation)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Translation)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Translation)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Translation)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PartOfSpeech)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PartOfSpeech)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PartOfSpeech)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PartOfSpeech)
-        </dd>
+        </dl>
 
-    </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to Words", "Index")
+            </div>
+        }
+    </div>
+</body>

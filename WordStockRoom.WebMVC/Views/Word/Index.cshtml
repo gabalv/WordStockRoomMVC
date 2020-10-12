@@ -3,44 +3,30 @@
 @{
     ViewBag.Title = "Index";
 }
+@Styles.Render("~/Content/css")
 
-<h2>Index</h2>
+<body style="background-color: #424242; color: #ABABAB;">
+    <h2>@ViewData["Language"]</h2>
 
-<p>
-    @Html.ActionLink("Add Word", "Create")
-</p>
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.WordName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Translation)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Add Word", "Create")
+    </p>
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.WordName, "Details", new { id=item.WordId })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Translation)
-            </td>
-            <td>
-                
-            </td>
-        </tr>
+        <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+            <h2>@Html.ActionLink(item.WordName, "Details", new { id = item.WordId })</h2>
+            <h4>@Html.DisplayFor(modelItem => item.Translation)</h4>
+        </div>
     }
-</table>
+    @Html.ActionLink("Back to Languages", "Index", "Language")
+</body>

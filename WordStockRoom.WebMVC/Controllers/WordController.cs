@@ -28,6 +28,9 @@ namespace WordStockRoom.WebMVC.Controllers
             var model = service.GetWordsByLanguage((int)languageId);
             if (model is null) return HttpNotFound();
 
+            var languageService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
+            ViewData["Language"] = languageService.GetLanguageById((int)languageId).Name;
+
             return View(model);
         }
 
@@ -35,6 +38,9 @@ namespace WordStockRoom.WebMVC.Controllers
         public ActionResult Create(int? languageId)
         {
             if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var languageService = new LanguageService(Guid.Parse(User.Identity.GetUserId()));
+            ViewData["Language"] = languageService.GetLanguageById((int)languageId).Name;
 
             return View();
         }

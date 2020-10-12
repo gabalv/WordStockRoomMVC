@@ -4,23 +4,19 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<body style="background-color: #424242; color: #ABABAB;">
+    <h1>@Html.DisplayFor(model => model.Description)</h1>
 
-<div>
-    <h4>VideoDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <h6>
-            @Html.DisplayFor(model => model.Description)
-        </h6>
-
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src=@Model.URL title=@Model.Description></iframe>
-        </div>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VideoId }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.VideoId }) |
-    @Html.ActionLink("Back to Word", "Details", "Word", new { id = ViewData["WordId"] }, null)
-</p>
+    <div>
+        <hr />
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src=@Model.URL title=@Model.Description></iframe>
+            </div>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VideoId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.VideoId }) |
+        @Html.ActionLink("Back to Word", "Details", "Word", new { id = ViewData["WordId"] }, null)
+    </p>
+</body>
