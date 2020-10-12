@@ -14,14 +14,17 @@ namespace WordStockRoom.Data
         public int SentenceId { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public string SentenceContent { get; set; }
 
         [Required]
         public string SentenceTranslation { get; set; }
 
+        [Required]
         [ForeignKey(nameof(Word))]
         public int WordId { get; set; }
-        [Required]
         public virtual Word Word { get; set; }
     }
 }

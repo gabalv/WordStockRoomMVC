@@ -56,6 +56,15 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="Migrations\202009292102325_InitialCreate.cs" />
+    <Compile Include="Migrations\202009292102325_InitialCreate.Designer.cs">
+      <DependentUpon>202009292102325_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010060228485_InitialMigration.cs" />
+    <Compile Include="Migrations\202010060228485_InitialMigration.Designer.cs">
+      <DependentUpon>202010060228485_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sentence.cs" />
     <Compile Include="Video.cs" />
@@ -64,6 +73,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009292102325_InitialCreate.resx">
+      <DependentUpon>202009292102325_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010060228485_InitialMigration.resx">
+      <DependentUpon>202010060228485_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

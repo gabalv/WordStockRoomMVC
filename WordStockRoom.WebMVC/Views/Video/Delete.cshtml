@@ -1,0 +1,38 @@
+﻿@model WordStockRoom.Models.VideoDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<body style="background-color: #424242; color: #ABABAB;">
+    <h1>Delete Video</h1>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src=@Model.URL title=@Model.Description></iframe>
+            </div>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to Word", "Details", "Word", new { id = ViewData["WordId"] }, null)
+            </div>
+        }
+    </div>
+</body>

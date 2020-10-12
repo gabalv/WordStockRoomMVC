@@ -1,0 +1,78 @@
+﻿@model WordStockRoom.Models.WordDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<body style="background-color: #424242; color: #ABABAB;">
+    <h1>@Html.DisplayFor(model => model.Language)</h1>
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
+    <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+        <h1 style="font-size: 4em; text-shadow: 0 0 0.2px #73373F;">@Html.DisplayFor(model => model.WordName)</h1>
+        <hr />
+        <hr />
+        <h3>
+            @Html.DisplayNameFor(model => model.Translation)
+        </h3>
+        <h4>
+            @Html.DisplayFor(model => model.Translation)
+        </h4>
+        <hr />
+        <h3>
+            @Html.DisplayNameFor(model => model.PartOfSpeech)
+        </h3>
+        <h4>
+            @Html.DisplayFor(model => model.PartOfSpeech)
+        </h4>
+        <hr />
+        <div style="display: inline-block; float: left; width: 50%;">
+            <h2>
+                @Html.DisplayNameFor(model => model.Sentences)
+            </h2>
+            <hr />
+            @foreach (var item in ViewBag.Sentences)
+            {
+                <h3>
+                    @item.SentenceContent
+                </h3>
+                <h4>
+                    @item.SentenceTranslation
+                </h4>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null)
+                </p>
+                <br />
+            }
+        </div>
+        <div style="display: inline-block; float: right; width: 50%;">
+            <h2>
+                @Html.DisplayNameFor(model => model.Videos)
+            </h2>
+            <hr />
+            @foreach (var item in ViewBag.Videos)
+            {
+                <h4>
+                    @Html.ActionLink((string)item.Description, "Details", "Video", new { wordId = Model.WordId, id = item.VideoId }, null)
+                </h4>
+                <br />
+            }
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Add Sentence", "Create", "Sentence", new { Model.WordId }, null) |
+        @Html.ActionLink("Add Video", "Create", "Video", new { Model.WordId }, null) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.WordId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.WordId }) |
+        @Html.ActionLink("Back to Words", "Index")
+    </p>
+</body>

@@ -5,22 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordStockRoom.Data
+namespace WordStockRoom.Models
 {
-    public class Language
+    public class LanguageListItem
     {
-        [Key]
         public int LanguageId { get; set; }
-
-        [Required]
-        public Guid UserId { get; set; }
-
-        [Required]
         public string Name { get; set; }
 
-        [Required]
+        [Display(Name="Language Family")]
         public string LanguageFamily { get; set; }
 
-        public virtual ICollection<Word> Words { get; set; } = new List<Word>();
+        [Display(Name="Word Count")]
+        public int WordCount { get; set; }
     }
 }

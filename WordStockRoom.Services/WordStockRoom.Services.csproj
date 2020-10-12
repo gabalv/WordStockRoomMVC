@@ -54,11 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LanguageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SentenceService.cs" />
+    <Compile Include="VideoService.cs" />
+    <Compile Include="WordService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WordStockRoom.Data\WordStockRoom.Data.csproj">
+      <Project>{d7636039-bd5b-4d8d-b427-11698baaf19d}</Project>
+      <Name>WordStockRoom.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordStockRoom.Models\WordStockRoom.Models.csproj">
+      <Project>{c3ea3a7a-aaf6-43c0-9624-8aea76c6caca}</Project>
+      <Name>WordStockRoom.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

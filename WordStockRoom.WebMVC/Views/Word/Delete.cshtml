@@ -1,0 +1,57 @@
+﻿@model WordStockRoom.Models.WordDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<body style="background-color: #424242; color: #ABABAB;">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        @Html.HiddenFor(model => model.WordId)
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.WordName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.WordName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Language)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Language)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Translation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Translation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PartOfSpeech)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PartOfSpeech)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to Words", "Index")
+            </div>
+        }
+    </div>
+</body>

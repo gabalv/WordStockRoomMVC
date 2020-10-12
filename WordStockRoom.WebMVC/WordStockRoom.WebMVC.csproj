@@ -169,7 +169,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SentenceController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +238,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\Language\Delete.cshtml" />
+    <Content Include="Views\Word\Index.cshtml" />
+    <Content Include="Views\Word\Create.cshtml" />
+    <Content Include="Views\Word\Details.cshtml" />
+    <Content Include="Views\Word\Edit.cshtml" />
+    <Content Include="Views\Word\Delete.cshtml" />
+    <Content Include="Views\Sentence\Create.cshtml" />
+    <Content Include="Views\Sentence\Edit.cshtml" />
+    <Content Include="Views\Sentence\Delete.cshtml" />
+    <Content Include="Views\Video\Create.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\Video\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

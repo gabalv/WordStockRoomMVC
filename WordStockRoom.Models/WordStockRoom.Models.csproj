@@ -54,11 +54,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Language\LanguageCreate.cs" />
+    <Compile Include="Language\LanguageEdit.cs" />
+    <Compile Include="Language\LanguageListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sentence\SentenceCreate.cs" />
+    <Compile Include="Sentence\SentenceEdit.cs" />
+    <Compile Include="Sentence\SentenceListItem.cs" />
+    <Compile Include="Video\VideoCreate.cs" />
+    <Compile Include="Video\VideoDetail.cs" />
+    <Compile Include="Video\VideoEdit.cs" />
+    <Compile Include="Word\WordCreate.cs" />
+    <Compile Include="Word\WordDetail.cs" />
+    <Compile Include="Word\WordEdit.cs" />
+    <Compile Include="Word\WordListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WordStockRoom.Data\WordStockRoom.Data.csproj">
+      <Project>{d7636039-bd5b-4d8d-b427-11698baaf19d}</Project>
+      <Name>WordStockRoom.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

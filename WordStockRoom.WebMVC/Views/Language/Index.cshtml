@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WordStockRoom.Models.LanguageListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body style="background-color: #424242; color: #ABABAB;">
+    <h1>Your Languages</h1>
+
+    <p>
+        @Html.ActionLink("Add Language", "Create")
+    </p>
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+            <h2>@Html.ActionLink(item.Name, "Index", "Word", new { item.LanguageId }, null)</h2>
+            <h4>@Html.DisplayFor(modelItem => item.LanguageFamily)</h4>
+            <span class="col-md-6">@Html.ActionLink("Edit", "Edit", new { id = item.LanguageId })</span>
+            <span class="col-md-6">@Html.ActionLink("Delete", "Delete", new { id = item.LanguageId })</span>
+        </div>
+    }
+</body>

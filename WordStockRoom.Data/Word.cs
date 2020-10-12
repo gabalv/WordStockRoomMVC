@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace WordStockRoom.Data
 {
-    public enum PartOfSpeech { undefined, noun, pronoun, verb, adjective, adverb, preposition, conjunction, interjection, postposition, determiner }
+    public enum PartOfSpeech { undefined, noun, pronoun, verb, adjective, adverb, preposition, postposition, conjunction, interjection, determiner }
 
     public class Word
     {
         [Key]
         public int WordId { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
 
         [Required]
         public string WordName { get; set; }
@@ -28,10 +31,9 @@ namespace WordStockRoom.Data
 
         public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
 
-
+        [Required]
         [ForeignKey(nameof(Language))]
         public int LanguageId { get; set; }
-        [Required]
         public virtual Language Language { get; set; }
     }
 }

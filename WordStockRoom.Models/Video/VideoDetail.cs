@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WordStockRoom.Data
+namespace WordStockRoom.Models
 {
-    public class Video
+    public class VideoDetail
     {
-        [Key]
-        public int VideoId { get; set; }
-
         [Required]
-        public Guid UserId { get; set; }
+        public int VideoId { get; set; }
 
         [Required]
         public string Description { get; set; }
@@ -23,8 +19,9 @@ namespace WordStockRoom.Data
         public string URL { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Word))]
-        public int WordId { get; set; }
-        public virtual Word Word { get; set; }
+        public string Word { get; set; }
+
+        [Required]
+        public string Language { get; set; }
     }
 }
