@@ -19,13 +19,9 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.URL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.URL)
-        </dd>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=@Model.URL title=@Model.Description></iframe>
+        </div>
 
     </dl>
 
