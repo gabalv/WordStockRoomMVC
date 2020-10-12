@@ -57,6 +57,7 @@
     <Compile Include="LanguageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SentenceService.cs" />
+    <Compile Include="VideoService.cs" />
     <Compile Include="WordService.cs" />
   </ItemGroup>
   <ItemGroup>

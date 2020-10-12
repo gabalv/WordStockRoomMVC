@@ -73,6 +73,14 @@ namespace WordStockRoom.WebMVC.Controllers
             }
             ViewBag.Sentences = sentences;
 
+            var videoService = new VideoService(Guid.Parse(User.Identity.GetUserId()), (int)id);
+            List<VideoDetail> videos = new List<VideoDetail>();
+            foreach (var item in model.Videos)
+            {
+                videos.Add(videoService.GetVideoById(item.Key));
+            }
+            ViewBag.Videos = videos;
+
             return View(model);
         }
 

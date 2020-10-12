@@ -59,7 +59,7 @@ namespace WordStockRoom.Services
             var entity =
                 _context
                 .Sentences
-                .Single(e => e.SentenceId == id && e.UserId == _userId);
+                .SingleOrDefault(e => e.SentenceId == id && e.UserId == _userId);
 
             return new SentenceListItem
             {
@@ -75,7 +75,7 @@ namespace WordStockRoom.Services
             var entity =
                 _context
                 .Sentences
-                .Single(e => e.UserId == _userId && e.SentenceId == model.SentenceId);
+                .SingleOrDefault(e => e.UserId == _userId && e.SentenceId == model.SentenceId);
 
             entity.SentenceContent = model.SentenceContent;
             entity.SentenceTranslation = model.SentenceTranslation;

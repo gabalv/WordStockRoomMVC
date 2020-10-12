@@ -61,6 +61,9 @@
     <Compile Include="Sentence\SentenceCreate.cs" />
     <Compile Include="Sentence\SentenceEdit.cs" />
     <Compile Include="Sentence\SentenceListItem.cs" />
+    <Compile Include="Video\VideoCreate.cs" />
+    <Compile Include="Video\VideoDetail.cs" />
+    <Compile Include="Video\VideoEdit.cs" />
     <Compile Include="Word\WordCreate.cs" />
     <Compile Include="Word\WordDetail.cs" />
     <Compile Include="Word\WordEdit.cs" />
@@ -76,5 +79,6 @@
       <Name>WordStockRoom.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

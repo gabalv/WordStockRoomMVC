@@ -69,10 +69,27 @@
                 @Html.ActionLink("Delete", "Delete", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null)
             </dd>
         }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Videos)
+        </dt>
+
+        @foreach (var item in ViewBag.Videos)
+        {
+            <dd>
+                @Html.ActionLink((string)item.Description, "Details", "Video", new { wordId = Model.WordId, id = item.VideoId }, null)
+            </dd>
+
+            <dd>
+                @Html.ActionLink("Edit", "Edit", "Video", new { wordId = Model.WordId, id = item.VideoId }, null) |
+                @Html.ActionLink("Delete", "Delete", "Video", new { wordId = Model.WordId, id = item.VideoId }, null)
+            </dd>
+        }
     </dl>
 </div>
 <p>
     @Html.ActionLink("Add Sentence", "Create", "Sentence", new { Model.WordId }, null) |
+    @Html.ActionLink("Add Video", "Create", "Video", new { Model.WordId }, null) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.WordId }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.WordId }) |
     @Html.ActionLink("Back to List", "Index")

@@ -172,6 +172,7 @@
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SentenceController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -249,6 +250,10 @@
     <Content Include="Views\Sentence\Create.cshtml" />
     <Content Include="Views\Sentence\Edit.cshtml" />
     <Content Include="Views\Sentence\Delete.cshtml" />
+    <Content Include="Views\Video\Create.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\Video\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

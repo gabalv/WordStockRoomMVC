@@ -1,0 +1,30 @@
+﻿@model WordStockRoom.Models.VideoDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VideoDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dd>
+            <iframe src=@Model.URL title=@Model.Description></iframe>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VideoId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.VideoId }) |
+    @Html.ActionLink("Back to Word", "Details", "Word", new { id = ViewData["WordId"] }, null)
+</p>
