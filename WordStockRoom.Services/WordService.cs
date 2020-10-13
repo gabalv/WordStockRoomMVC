@@ -103,6 +103,27 @@ namespace WordStockRoom.Services
             return _context.SaveChanges() == 1;
         }
 
+        public WordListItem GetFlashcard()
+        {
+            Random rand = new Random();
+
+            var query =
+                _context
+                .Words
+                .Where(e => e.UserId == _userId && e.LanguageId == _languageId)
+                .Select(e => new WordListItem
+                {
+                    WordId = e.WordId,
+                    WordName = e.WordName,
+                    LanguageId = e.LanguageId,
+                    Language = e.Language.Name,
+                    Translation = e.Translation
+                });
+
+            var wordArray = query.ToArray();
+            return wordArray[rand.Next(0, wordArray.Count())];
+        }
+
 
         // helper
         public Dictionary<int, string> ConvertFromSentencesToDictionary(ICollection<Sentence> sentences)

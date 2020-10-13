@@ -1,0 +1,50 @@
+﻿@model WordStockRoom.Models.WordListItem
+
+@{
+    ViewBag.Title = "Flashcard";
+}
+
+<body style="background-color: #424242; color: #ABABAB;">
+    <h3 style="text-align: center;">Click on the card to toggle between the word and the translation.</h3>
+    <div class="card">
+        <button class="button" style="position: relative; margin-top: 0.5em; width: 100%; height: 10em; font-size: 3em; background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+            <section class="front">
+                @Html.DisplayFor(model => model.WordName)
+            </section>
+            <section class="back">
+                @Html.DisplayFor(model => model.Translation)
+            </section>
+        </button>
+    </div>
+    <p>
+        @Html.ActionLink("Back to Words", "Index")
+    </p>
+</body>
+
+<style>
+    section {
+        position: absolute;
+        margin: auto;
+        top: 40%; left: 0; bottom: 0; right: 0;
+    }
+
+    button {
+        outline: none;
+    }
+
+    .button .front {
+        opacity: 1;
+    }
+
+    .button .back {
+        opacity: 0;
+    }
+
+    .button:active .front {
+        opacity: 0;
+    }
+
+    .button:active .back {
+        opacity: 1;
+    }
+</style>

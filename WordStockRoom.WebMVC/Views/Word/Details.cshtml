@@ -16,9 +16,12 @@
         </div>
     }
     <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
-        <h1 style="font-size: 4em; text-shadow: 0 0 0.2px #73373F;">@Html.DisplayFor(model => model.WordName)</h1>
-        <hr />
-        <hr />
+        <div style="background-color: #CDCDCD; margin: 0; border-radius: 0.5em; box-shadow: 0 0 250px #BBBBBB">
+            <h1 style="color: #777480; font-size: 4em; text-shadow: 0 0 1px #73373F;">@Html.DisplayFor(model => model.WordName)</h1>
+        </div>
+        <hr id="top-bar" />
+        <div id="placeholder"></div>
+        <hr id="bottom-bar" />
         <h3>
             @Html.DisplayNameFor(model => model.Translation)
         </h3>
@@ -34,27 +37,29 @@
         </h4>
         <hr />
         <div style="display: inline-block; float: left; width: 50%;">
-            <h2>
+            <h2 style="color: #9895A1">
                 @Html.DisplayNameFor(model => model.Sentences)
             </h2>
             <hr />
             @foreach (var item in ViewBag.Sentences)
             {
-                <h3>
-                    @item.SentenceContent
-                </h3>
-                <h4>
-                    @item.SentenceTranslation
-                </h4>
-                <p>
-                    @Html.ActionLink("Edit", "Edit", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null) |
-                    @Html.ActionLink("Delete", "Delete", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null)
-                </p>
+                <div id="sentences">
+                    <h3>
+                        @item.SentenceContent
+                    </h3>
+                    <h4 id="sentenceTranslation">
+                        @item.SentenceTranslation
+                    </h4>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Sentence", new { wordId = Model.WordId, id = item.SentenceId }, null)
+                    </p>
+                </div>
                 <br />
             }
         </div>
         <div style="display: inline-block; float: right; width: 50%;">
-            <h2>
+            <h2 style="color: #9895A1">
                 @Html.DisplayNameFor(model => model.Videos)
             </h2>
             <hr />
@@ -76,3 +81,27 @@
         @Html.ActionLink("Back to Words", "Index")
     </p>
 </body>
+
+<style>
+    #placeholder {
+        background-color: #D7D7D7;
+        height: 1em;
+        margin: 0;
+    }
+
+    #top-bar {
+        margin-bottom: 0.1em;
+    }
+
+    #bottom-bar {
+        margin-top: 0.1em;
+    }
+
+    #sentenceTranslation {
+        opacity: 0;
+    }
+
+    #sentences:hover > #sentenceTranslation {
+        opacity: 1;
+    }
+</style>

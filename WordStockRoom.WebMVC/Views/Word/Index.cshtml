@@ -23,10 +23,25 @@
 
     @foreach (var item in Model)
     {
-        <div class="col-md-12" style="background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
-            <h2>@Html.ActionLink(item.WordName, "Details", new { id = item.WordId })</h2>
-            <h4>@Html.DisplayFor(modelItem => item.Translation)</h4>
-        </div>
+        <button class="col-md-12" id="wordButton" style="outline: none; background-color: lightgrey; margin: 1em auto; border: black; border-radius: 1em; box-shadow: 0 0 20px #110140; text-align: center;">
+            <h2 id="word">@Html.ActionLink(item.WordName, "Details", new { id = item.WordId })</h2>
+            <h4 id="translation">@Html.DisplayFor(modelItem => item.Translation)</h4>
+        </button>
     }
-    @Html.ActionLink("Back to Languages", "Index", "Language")
+    @Html.ActionLink("Back to Languages", "Index", "Language") |
+    @Html.ActionLink("Go to Flashcards", "Flashcard")
 </body>
+
+<style>
+    #word:active + #translation {
+        color: lightgrey;
+    }
+
+    #translation {
+        opacity: 0;
+    }
+
+    #wordButton:active #translation {
+        opacity: 1;
+    }
+</style>

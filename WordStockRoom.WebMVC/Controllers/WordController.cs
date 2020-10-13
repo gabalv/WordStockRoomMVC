@@ -164,5 +164,16 @@ namespace WordStockRoom.WebMVC.Controllers
             ModelState.AddModelError("", "Word was not deleted.");
             return RedirectToAction("Index");
         }
+
+        // GET: Flashcard
+        public ActionResult Flashcard(int? languageId)
+        {
+            if (languageId is null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var service = CreateWordService((int)languageId);
+            var model = service.GetFlashcard();
+
+            return View(model);
+        }
     }
 }
